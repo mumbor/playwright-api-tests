@@ -16,7 +16,7 @@ test.describe('GitHub API — authenticated', () => {
     const api = new GithubApi(request);
     const user = await api.getAuthenticatedUser();
 
-    expect(user.login).toBe(process.env.GITHUB_USERNAME);
+    expect(user.login).toBe(process.env.GH_USERNAME);
   });
 
   test('authenticated user has public repos', async ({ request }) => {
