@@ -61,4 +61,12 @@ test.describe('Posts API', () => {
 
   });
 
+  test('returns 404 for a post that does not exist', async ({ request }) => {
+    const api = new PostsApi(request);
+    const result = await api.getPostSafe(99999);
+
+    expect(result.status).toBe(404);
+    expect(result.success).toBe(false);
+  });
+
 });
