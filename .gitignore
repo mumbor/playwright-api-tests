@@ -1,4 +1,6 @@
 .env
+.env.dev
+.env.staging
 node_modules/
 test-results/
 playwright-report/

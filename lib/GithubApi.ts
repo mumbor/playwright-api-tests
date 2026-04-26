@@ -18,7 +18,7 @@ export interface GithubRepo {
 }
 
 export class GithubApi {
-  constructor(private request: APIRequestContext) {}
+  constructor(private request: APIRequestContext) { }
 
   async getAuthenticatedUser(): Promise<GithubUser> {
     const response = await this.request.get('/user');
@@ -33,5 +33,29 @@ export class GithubApi {
   async getRepos(): Promise<GithubRepo[]> {
     const response = await this.request.get('/user/repos');
     return response.json() as Promise<GithubRepo[]>;
+  }
+
+  async getRepoPage(page: number, perPage: number): Promise<GithubRepo[]> {
+    const response = await this.request.get(
+      `/user/repos?page=${page}&per_page=${perPage}`
+    );
+    return response.json() as Promise<GithubRepo[]>;
+  }
+
+  async getAllRepos(): Promise<GithubRepo[]> {
+    const allRepos: GithubRepo[] = [];
+    const perPage = 10;
+    let page = 1;
+    const maxPages = 20;
+
+    while (page <= maxPages) {
+      const repos = await this.getRepoPage(page, perPage);
+      if (repos.length === 0) break;
+      allRepos.push(...repos);
+      if (repos.length < perPage) break;
+      page++;
+    }
+
+    return allRepos;
   }
 }
