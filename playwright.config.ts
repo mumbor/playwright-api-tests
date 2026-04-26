@@ -22,7 +22,7 @@ export default defineConfig({
         baseURL: 'https://jsonplaceholder.typicode.com',
         extraHTTPHeaders: {},
       },
-      testMatch: ['**/posts*.spec.ts', '**/crud.spec.ts'],
+      testMatch: ['**/posts*.spec.ts', '**/crud.spec.ts', '**/factory.spec.ts'],
     },
     {
       name: 'github',

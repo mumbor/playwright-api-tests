@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { faker } from '@faker-js/faker';
 import { PostsApi, Post } from '../lib/PostsApi';
 
 test.describe('Posts API', () => {
@@ -26,13 +27,15 @@ test.describe('Posts API', () => {
   test.describe('create and read back', () => {
     let createdPost: Post;
 
+    const postData = {
+      title: faker.lorem.sentence(),
+      body: faker.lorem.paragraph(),
+      userId: faker.number.int({ min: 1, max: 10 }),
+    };
+
     test.beforeAll(async ({ request }) => {
       const api = new PostsApi(request);
-      createdPost = await api.createPost({
-        title: 'Helper class test post',
-        body: 'Created via PostsApi helper',
-        userId: 1,
-      });
+      createdPost = await api.createPost(postData);
     });
 
     test('created post has an id', () => {
@@ -40,11 +43,11 @@ test.describe('Posts API', () => {
     });
 
     test('created post title matches input', () => {
-      expect(createdPost.title).toBe('Helper class test post');
+      expect(createdPost.title).toBe(postData.title);
     });
 
     test('created post userId matches input', () => {
-      expect(createdPost.userId).toBe(1);
+      expect(createdPost.userId).toBe(postData.userId);
     });
 
   });
