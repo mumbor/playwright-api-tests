@@ -16,11 +16,7 @@ export default defineConfig({
         baseURL: process.env.BASE_URL ?? 'https://jsonplaceholder.typicode.com',
         extraHTTPHeaders: {},
       },
-      testMatch: [
-        '**/posts*.spec.ts',
-        '**/crud.spec.ts',
-        '**/factory.spec.ts',
-      ],
+      testMatch: ['**/posts/*.spec.ts']
     },
     {
       name: 'github',
@@ -32,7 +28,7 @@ export default defineConfig({
           'X-GitHub-Api-Version': '2022-11-28',
         },
       },
-      testMatch: ['**/github.spec.ts', '**/pagination.spec.ts'],
+      testMatch: ['**/github/*.spec.ts'],
     },
   ],
 });

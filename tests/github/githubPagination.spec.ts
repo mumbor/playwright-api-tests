@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { GithubApi } from '../lib/GithubApi';
+import { GithubApi } from '../../lib/GithubApi';
 
 test.describe('GitHub API — pagination', () => {
 

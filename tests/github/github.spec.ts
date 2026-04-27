@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { GithubApi, GithubUser } from '../lib/GithubApi';
+import { GithubApi, GithubUser } from '../../lib/GithubApi';
 
 test.describe('GitHub API — authenticated', () => {
 
