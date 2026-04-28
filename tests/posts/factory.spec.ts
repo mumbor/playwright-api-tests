@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
-import { PostsApi } from '../lib/PostsApi';
-import { createPostData } from '../lib/factories';
+import { PostsApi } from '../../lib/PostsApi';
+import { createPostData } from '../../lib/factories';
 
 test.describe('Posts API — factory and parameterised tests', () => {
 

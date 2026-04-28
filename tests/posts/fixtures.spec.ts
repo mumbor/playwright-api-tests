@@ -1,5 +1,5 @@
-import { test, expect } from '../lib/fixtures';
-import { createPostData } from '../lib/factories';
+import { test, expect } from '../../lib/fixtures';
+import { createPostData } from '../../lib/factories';
 
 test.describe('Posts API — using fixtures', () => {
 

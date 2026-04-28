@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { PostsApi, Post } from '../lib/PostsApi';
+import { PostsApi, Post } from '../../lib/PostsApi';
 
 test.describe('Posts API — CRUD flow', () => {
   let post: Post;

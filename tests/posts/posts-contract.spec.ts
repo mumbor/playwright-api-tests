@@ -1,7 +1,6 @@
 import path from 'path';
 import { PactV3, MatchersV3 } from '@pact-foundation/pact';
 import { test, expect } from '@playwright/test';
-import { PostsApi } from '../../lib/PostsApi';
 
 const { like, integer, string, eachLike } = MatchersV3;
 

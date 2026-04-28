@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
-import { PostsApi, Post } from '../lib/PostsApi';
+import { PostsApi, Post } from '../../lib/PostsApi';
 
 test.describe('Posts API', () => {
 
