@@ -2,7 +2,7 @@
 
 A production-grade API test suite built with Playwright and TypeScript.
 
-![CI](https://github.com/mumbor/api-tests/actions/workflows/playwright.yml/badge.svg)
+![CI](https://github.com/mumbor/playwright-api-tests/actions/workflows/playwright.yml/badge.svg)
 
 ## What this suite tests
 
