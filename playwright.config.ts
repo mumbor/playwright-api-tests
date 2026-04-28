@@ -30,5 +30,13 @@ export default defineConfig({
       },
       testMatch: ['**/github/*.spec.ts'],
     },
+    {
+      name: 'performance',
+      use: {
+        baseURL: process.env.BASE_URL ?? 'https://jsonplaceholder.typicode.com',
+        extraHTTPHeaders: {},
+      },
+      testMatch: ['**/posts/performance.spec.ts']
+    }
   ],
 });
