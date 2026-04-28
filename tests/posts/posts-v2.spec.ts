@@ -6,7 +6,7 @@ test.describe('Posts API', () => {
 
   test.describe('list and fetch', () => {
 
-    test('get all posts returns 100 items', async ({ request }) => {
+    test('get all posts returns 100 items @smoke', async ({ request }) => {
       const api = new PostsApi(request);
       const posts = await api.getAllPosts();
 
@@ -14,7 +14,7 @@ test.describe('Posts API', () => {
       expect(posts[0].id).toBeDefined();
     });
 
-    test('get a single post by id', async ({ request }) => {
+    test('get a single post by id @smoke', async ({ request }) => {
       const api = new PostsApi(request);
       const post = await api.getPost(1);
 

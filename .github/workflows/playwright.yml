@@ -24,8 +24,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Run smoke tests
+        run: npx playwright test --grep "@smoke" --reporter=list
+        env:
+          GH_API_TOKEN: ${{ secrets.GH_API_TOKEN }}
+          GH_USERNAME: ${{ secrets.GH_USERNAME }}
+
       - name: Run functional tests
-        run: npx playwright test --project=jsonplaceholder --project=github
+        run: npx playwright test --project=jsonplaceholder --project=github --grep-invert "@performance"
         env:
           GH_API_TOKEN: ${{ secrets.GH_API_TOKEN }}
           GH_USERNAME: ${{ secrets.GH_USERNAME }}

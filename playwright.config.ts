@@ -8,7 +8,11 @@ dotenv.config({ path: path.resolve(process.cwd(), `.env.${env}`) });
 export default defineConfig({
   workers: 4,
   retries: 1,
-  reporter: 'html',
+  reporter: [
+    ['html'],
+    ['allure-playwright'],
+    ['github']
+  ],
   projects: [
     {
       name: 'jsonplaceholder',
@@ -40,3 +44,4 @@ export default defineConfig({
     }
   ],
 });
+

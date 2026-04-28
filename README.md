@@ -1,135 +1,84 @@
-# Playwright API Tests
+# Playwright API Test Suite
 
-A comprehensive API testing suite built with Playwright and TypeScript for testing RESTful APIs.
+A production-grade API test suite built with Playwright and TypeScript.
 
-> **Note:** This project is an exercise to learn and practice how to use Playwright for API testing.
+![CI](https://github.com/mumbor/api-tests/actions/workflows/playwright.yml/badge.svg)
 
-## Project Structure
+## What this suite tests
 
-```
-api-tests/
-├── lib/
-│   ├── PostsApi.ts          # Posts API utility class
-│   └── GithubApi.ts         # GitHub API utility class
-├── tests/
-│   ├── first.spec.ts        # Initial test example
-│   ├── posts.spec.ts        # Posts API tests (basic)
-│   ├── posts-v2.spec.ts     # Posts API tests (refactored with PostsApi class)
-│   ├── github.spec.ts       # GitHub API tests
-│   └── crud.spec.ts         # CRUD operations tests
-├── playwright.config.ts     # Playwright configuration
-├── package.json             # Project dependencies
-├── .env                     # Environment variables
-└── .gitignore              # Git ignore file
-```
+- **JSONPlaceholder API** — CRUD operations, error responses, schema validation, performance
+- **GitHub REST API** — authenticated requests, pagination, error handling
+- **GitHub GraphQL API** — queries, variables, error detection
+- **Contract tests** — consumer-driven contract verification with Pact
+
+## Tech stack
+
+- [Playwright](https://playwright.dev) — test runner and HTTP client
+- [TypeScript](https://www.typescriptlang.org) — typed test code
+- [Zod](https://zod.dev) — runtime response schema validation
+- [Faker](https://fakerjs.dev) — dynamic test data generation
+- [Pact](https://pact.io) — consumer-driven contract testing
+- [Allure](https://allurereport.org) — test reporting
 
 ## Setup
 
-### Prerequisites
-- Node.js 16+ installed
-- npm or yarn
-
-### Installation
-
-1. Clone or navigate to the project directory:
-```bash
-cd api-tests
-```
-
+1. Clone the repo
 2. Install dependencies:
 ```bash
-npm install
+   npm install
 ```
+3. Copy `.env.dev` and fill in your values:
 
-3. Install Playwright browsers:
-```bash
-npx playwright install
-```
-
-## Configuration
-
-The project uses a `.env` file for environment variables:
-
-```env
+GH_API_TOKEN=your_github_personal_access_token
+GH_USERNAME=your_github_username
 BASE_URL=https://jsonplaceholder.typicode.com
-API_TIMEOUT=30000
-```
 
-For GitHub API testing, add your token:
-```env
-GITHUB_TOKEN=your_github_token_here
-```
+## Running tests
 
-## Running Tests
-
-### Run all tests
+Run all tests:
 ```bash
 npx playwright test
 ```
 
-### Run a specific test file
+Run smoke tests only (fast, ~30 seconds):
 ```bash
-npx playwright test tests/posts.spec.ts
+npx playwright test --grep "@smoke"
 ```
 
-### Run tests with list reporter
+Run a specific project:
 ```bash
-npx playwright test --reporter=list
+npx playwright test --project=jsonplaceholder
+npx playwright test --project=github
+npx playwright test --project=performance
 ```
 
-### Run tests in headed mode (show browser)
-```bash
-npx playwright test --headed
+Run against staging:
+```powershell
+$env:TEST_ENV="staging"; npx playwright test
 ```
 
-### Run tests in debug mode
+## Reports
+
+Open the built-in HTML report:
 ```bash
-npx playwright test --debug
+npx playwright show-report
 ```
 
-## Test Files
+Generate and open the Allure report:
+```bash
+npx allure generate allure-results --clean
+npx allure open
+```
 
-- **posts.spec.ts** - Basic CRUD operations for Posts API using raw requests
-- **posts-v2.spec.ts** - Posts API tests using the `PostsApi` helper class (recommended approach)
-- **github.spec.ts** - Tests for GitHub API operations (search, user repos, issues)
-- **crud.spec.ts** - Demonstrates CRUD flow (note: works with existing JSONPlaceholder IDs)
-- **first.spec.ts** - Initial test example
+## CI
 
-## API Classes
+Tests run automatically on every push and pull request via GitHub Actions.
+Performance tests run on a weekly schedule every Monday at 9am.
 
-### PostsApi
-Located in `lib/PostsApi.ts`, manages all Posts API operations:
-- `getAllPosts()` - Get all posts
-- `getPost(id)` - Get a specific post
-- `createPost(data)` - Create a new post
-- `getPostsByUser(userId)` - Get posts by user ID
-- `updatePost(id, data)` - Update a post
-- `deletePost(id)` - Delete a post
+## Adding new tests
 
-### GithubApi
-Located in `lib/GithubApi.ts`, manages GitHub API operations:
-- `getUser(username)` - Get user information
-- `getUserRepos(username)` - Get user repositories
-- `getRepo(owner, repo)` - Get a specific repository
-- `searchRepositories(query)` - Search for repositories
-- `getIssues(owner, repo)` - Get repository issues
-
-## Notes
-
-- Tests use JSONPlaceholder as a mock API (data is not persisted)
-- For persistent data testing, connect to a real backend or database
-- GitHub API tests use public endpoints (no authentication required for basic operations)
-- HTML reports are generated in `playwright-report/` after test runs
-
-## Troubleshooting
-
-### Tests fail with "Object.is equality" errors
-- Ensure `baseURL` is configured in `playwright.config.ts`
-- Check that the API endpoints are accessible
-
-### Type errors for `process.env`
-- Install type definitions: `npm install -D @types/node`
-
-## License
-
-MIT
+1. Create a spec file in the relevant `tests/` subfolder
+2. Import from `../lib/fixtures` to get pre-configured API clients
+3. Use `createPostData()` from `lib/factories.ts` for test data
+4. Add the file to the correct project `testMatch` in `playwright.config.ts`
+5. Tag critical tests with `@smoke`

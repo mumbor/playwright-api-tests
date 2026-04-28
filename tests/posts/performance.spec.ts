@@ -9,7 +9,7 @@ const THRESHOLDS = {
 
 test.describe('Posts API — performance', () => {
 
-  test('get all posts responds within acceptable time', async ({ request }) => {
+  test('get all posts responds within acceptable time @performance', async ({ request }) => {
     const { response, durationMs } = await timedRequest(() =>
       request.get('/posts')
     );
@@ -19,7 +19,7 @@ test.describe('Posts API — performance', () => {
     expect(durationMs).toBeLessThan(THRESHOLDS.acceptable);
   });
 
-  test('get a single post responds within fast time', async ({ request }) => {
+  test('get a single post responds within fast time @performance', async ({ request }) => {
     const { response, durationMs } = await timedRequest(() =>
       request.get('/posts/1')
     );
@@ -29,7 +29,7 @@ test.describe('Posts API — performance', () => {
     expect(durationMs).toBeLessThan(THRESHOLDS.fast);
   });
 
-  test('create a post responds within acceptable time', async ({ request }) => {
+  test('create a post responds within acceptable time @performance', async ({ request }) => {
     const { response, durationMs } = await timedRequest(() =>
       request.post('/posts', {
         data: {
@@ -45,7 +45,7 @@ test.describe('Posts API — performance', () => {
     expect(durationMs).toBeLessThan(THRESHOLDS.acceptable);
   });
 
-  test('response times are consistent across multiple requests', async ({ request }) => {
+  test('response times are consistent across multiple requests @performance', async ({ request }) => {
     const durations: number[] = [];
 
     for (let i = 0; i < 5; i++) {

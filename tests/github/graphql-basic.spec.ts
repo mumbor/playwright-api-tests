@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('GitHub GraphQL API', () => {
 
-  test('fetch authenticated viewer login', async ({ request }) => {
+  test('fetch authenticated viewer login @smoke', async ({ request }) => {
     const response = await request.post('/graphql', {
       data: {
         query: `
