@@ -11,7 +11,8 @@ export default defineConfig({
   reporter: [
     ['html'],
     ['allure-playwright'],
-    ['github']
+    ['github'],
+    ['json', { outputFile: 'test-results/results.json' }],
   ],
   projects: [
     {

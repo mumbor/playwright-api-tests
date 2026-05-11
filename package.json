@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "playwright test",
+    "test:smoke": "playwright test --grep @smoke",
+    "heal": "tsx scripts/heal.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "devDependencies": {
+    "@anthropic-ai/sdk": "^0.52.0",
     "@faker-js/faker": "^10.4.0",
     "@pact-foundation/pact": "^16.3.0",
     "@playwright/test": "^1.59.1",
@@ -18,7 +21,8 @@
     "allure-commandline": "^2.38.1",
     "allure-playwright": "^3.7.1",
     "dotenv": "^17.4.2",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "tsx": "^4.19.0"
   },
   "dependencies": {
     "zod": "^4.3.6"
