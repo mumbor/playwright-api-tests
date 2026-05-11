@@ -6,7 +6,7 @@ const env = process.env.TEST_ENV ?? 'dev';
 dotenv.config({ path: path.resolve(process.cwd(), `.env.${env}`) });
 
 export default defineConfig({
-  timeout: 100,
+  timeout: 30000,
   workers: 4,
   retries: 1,
   reporter: [
